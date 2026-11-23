@@ -28,6 +28,12 @@ class PDFLoader:
 
         content = "\n".join(pages)
 
-
-loader = PDFLoader()
-loader.load("C://Users//cga5//Desktop//a.pdf")
+        return Document(
+            document_id=exact_path.stem ,
+            source_path= str(exact_path.resolve()),
+            document_type = "pdf",
+            title=metadata.get("title") or exact_path.stem,
+            content=content,
+            page_count=page_count,
+            metadata=metadata
+            )
