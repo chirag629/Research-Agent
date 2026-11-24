@@ -1,4 +1,4 @@
-import fitz
+import pymupdf
 import pytest
 
 from research_agent.ingestion.loaders.pdf_loader import PDFLoader
@@ -6,7 +6,7 @@ from research_agent.ingestion.loaders.pdf_loader import PDFLoader
 def test_pdf_loader(tmp_path):
     pdf_path = tmp_path / "sample.pdf"
 
-    doc = fitz.open()
+    doc = pymupdf.open()
     page = doc.new_page()
     page.insert_text((50,50),"Hello Research Agent");
     doc.save(pdf_path)
@@ -14,7 +14,6 @@ def test_pdf_loader(tmp_path):
 
     loader = PDFLoader()
     result = loader.load(str(pdf_path))
-
 
     assert result.document_type == "pdf"
     assert result.page_count == 1

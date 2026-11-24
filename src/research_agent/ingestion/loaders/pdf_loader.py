@@ -1,7 +1,7 @@
 
 from research_agent.ingestion.schemas import Document
 from pathlib import Path
-import fitz
+import pymupdf
 
 class PDFLoader:
 
@@ -16,7 +16,7 @@ class PDFLoader:
 
         pages = []
 
-        with fitz.open(exact_path) as pdf :
+        with pymupdf.open(exact_path) as pdf :
 
             for page_number, page in enumerate(pdf,start=1):
                 text = page.get_text("text")
